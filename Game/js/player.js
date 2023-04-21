@@ -1,12 +1,16 @@
 class Player {
-    constructor(ctx, playerW, playerH) {
+    constructor(ctx, playerPosX, playerPosY, playerW, playerH) {
         this.ctx = ctx;
-        this.playerW = playerW;
-        this.playerH = playerH;
+
+        this.playerSpecs = {
+            pos: { playerPosX: playerPosX, playerPosY: playerPosY },
+            size: { playerW: playerW, playerH: playerH }
+        }
+
+
         this.instancePayer();
         this.drawPlayer();
-        this.playerPosX = 0;
-        this.playerPosY = 0;
+
     }
 
     instancePayer() {
@@ -15,7 +19,16 @@ class Player {
     }
 
     drawPlayer() {
-        this.ctx.drawImage(this.image, this.playerPosX, this.playerPosY, this.playerW, this.playerH)
+        this.ctx.drawImage(
+            this.image,
+            this.playerSpecs.pos.playerPosX,
+            this.playerSpecs.pos.playerPosY,
+            this.playerSpecs.size.playerW,
+            this.playerSpecs.size.playerH
+        )
     }
-    //guardando
+
+
+
+
 }

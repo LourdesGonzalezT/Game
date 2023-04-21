@@ -16,6 +16,7 @@ const game = {
     init() {
         this.setContext()
         this.setDimensions()
+        this.setEventListeners()
         this.start()
     },
 
@@ -32,6 +33,27 @@ const game = {
         document.querySelector('canvas').setAttribute('height', this.canvasSize.canvasH)
     },
 
+    setEventListeners() {
+        document.onkeyup = event => {
+            const { key } = event
+            if (key == 'ArrowLeft') {
+                this.player.playerSpecs.pos.playerPosX -= 100
+            }
+            if (key == 'ArrowRight') {
+                this.player.playerSpecs.pos.playerPosX += 100
+            }
+            if (key == 'ArrowUp') {
+                this.player.playerSpecs.pos.playerPosY -= 100
+            }
+            if (key == 'ArrowDown') {
+                this.player.playerSpecs.pos.playerPosY += 100
+            }
+        }
+
+
+    },
+
+
     start() {
         this.reset()
         setInterval(() => {
@@ -42,8 +64,9 @@ const game = {
     },
 
     reset() {
-        this.background = new Background(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH)
-        this.player = new Player(this.ctx, 100, 100)
+        this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
+        this.player = new Player(this.ctx, 200, 200, 200, 200)
+
 
     },
 
@@ -53,6 +76,7 @@ const game = {
 
 
     },
+
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
