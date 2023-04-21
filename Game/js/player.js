@@ -17,5 +17,5 @@ class Player {
     drawPlayer() {
         this.ctx.drawImage(this.image, this.playerPosX, this.playerPosY, this.playerW, this.playerH)
     }
-
+    //guardando
 }
