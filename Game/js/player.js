@@ -10,12 +10,11 @@ class Player {
             gravity: 15
         }
 
-        this.instancePayer();
+        this.instancePlayer();
         this.drawPlayer();
-
     }
 
-    instancePayer() {
+    instancePlayer() {
         this.image = new Image();
         this.image.src = "./img/turttle.jpg"
     }
