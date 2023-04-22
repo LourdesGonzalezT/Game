@@ -37,22 +37,23 @@ const game = {
         document.onkeyup = event => {
             const { key } = event
             if (key == 'ArrowLeft') {
-                this.player.playerSpecs.pos.playerPosX -= 100
+                if (this.player.playerSpecs.pos.playerPosX > 0) {
+                    this.player.playerSpecs.pos.playerPosX -= this.player.playerSpecs.speedMove
+                }
             }
             if (key == 'ArrowRight') {
-                this.player.playerSpecs.pos.playerPosX += 100
+                if (this.player.playerSpecs.pos.playerPosX < this.canvasSize.canvasW - this.player.playerSpecs.size.playerW) {
+                    this.player.playerSpecs.pos.playerPosX += this.player.playerSpecs.speedMove
+                }
             }
-            if (key == 'ArrowUp') {
-                this.player.playerSpecs.pos.playerPosY -= 100
-            }
-            if (key == 'ArrowDown') {
-                this.player.playerSpecs.pos.playerPosY += 100
+            if (key == ' ') {
+                if (this.player.playerSpecs.pos.playerPosY > 0) {
+                    this.player.playerSpecs.pos.playerPosY -= this.player.playerSpecs.speedJump
+                }
+
             }
         }
-
-
     },
-
 
     start() {
         this.reset()
@@ -65,25 +66,16 @@ const game = {
 
     reset() {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
-        this.player = new Player(this.ctx, 200, 200, 200, 200)
-
-
+        this.player = new Player(this.ctx, 0, 100, 500, 500, this.canvasSize)
     },
 
     drawAll() {
         this.background.drawBackground()
         this.player.drawPlayer()
-
-
     },
-
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
-
     },
-
-
-
 
 }
