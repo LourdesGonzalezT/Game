@@ -10,9 +10,10 @@ const game = {
     background: undefined,
     player: undefined,
     goal: undefined,
-    platforms1: [], // array vacío para almacenar plataformas
-    platforms2: [],
-    platforms3: [],
+    // platforms1: [], // array vacío para almacenar plataformas
+    //  platforms2: [],
+    // platforms3: [],
+    platforms4: [],
     canvasSize: {
         canvasW: undefined,
         canvasH: undefined,
@@ -42,21 +43,31 @@ const game = {
         document.onkeyup = event => {
             const { key } = event
             if (key == 'ArrowLeft') {
-                if (this.player.playerSpecs.pos.playerPosX > 0) {
-                    this.player.playerSpecs.pos.playerPosX -= this.player.playerSpecs.speedMove
-                }
+                this.moveRight()
             }
             if (key == 'ArrowRight') {
-                if (this.player.playerSpecs.pos.playerPosX < this.canvasSize.canvasW - this.player.playerSpecs.size.playerW) {
-                    this.player.playerSpecs.pos.playerPosX += this.player.playerSpecs.speedMove
-                }
+                this.moveLeft()
             }
             if (key == ' ') {
-                if (this.player.playerSpecs.pos.playerPosY > 0) { // deberá saltar sólo cuando colisione con plataforma o suelo
-                    this.player.playerSpecs.pos.playerPosY -= this.player.playerSpecs.speedJump
-                }
+                this.jumping()
             }
         }
+    },
+    moveRight() {
+        if (this.player.playerSpecs.pos.playerX > 0) {
+            this.player.playerSpecs.pos.playerX -= this.player.playerSpecs.speedMove
+        }
+    },
+    moveLeft() {
+        if (this.player.playerSpecs.pos.playerX < this.canvasSize.canvasW - this.player.playerSpecs.size.playerW) {
+            this.player.playerSpecs.pos.playerX += this.player.playerSpecs.speedMove
+        }
+    },
+    jumping() {
+        if (this.player.playerSpecs.pos.playerY > 0) { // deberá saltar sólo cuando colisione con plataforma o suelo
+            this.player.playerSpecs.pos.playerY -= this.player.playerSpecs.speedJump
+        }
+
     },
 
     start() {
@@ -67,26 +78,35 @@ const game = {
             this.drawAll()
             this.generatePlatforms()
             this.clearPlatforms()
+            this.platformColision()
+            if (this.platformColision() === true) {
+                this.player.playerSpecs.pos.playerX += 15
+                this.player.playerSpecs.gravity = 0
+            } else {
+                this.player.playerSpecs.gravity = 15
+            }
         }, 1000 / this.FPS)
 
     },
 
     reset() {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
-        this.player = new Player(this.ctx, 0, this.canvasSize.canvasH - 500, 500, 500, this.canvasSize)
+        this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 500, 500, 500, this.canvasSize)
         this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 300, 100, 200, 200)
-        this.platforms1 = []
-        this.platforms2 = []
-        this.platforms3 = []
+        //this.platforms1 = []
+        //this.platforms2 = []
+        // this.platforms3 = []
+        this.platforms4 = []
     },
 
     drawAll() {
         this.background.drawBackground()
         this.player.drawPlayer()
         this.goal.drawGoal()
-        this.platforms1.forEach(elm => elm.drawPlatform())
-        this.platforms2.forEach(elm => elm.drawPlatform())
-        this.platforms3.forEach(elm => elm.drawPlatform())
+        //  this.platforms1.forEach(elm => elm.drawPlatform())
+        // this.platforms2.forEach(elm => elm.drawPlatform())
+        //this.platforms3.forEach(elm => elm.drawPlatform())
+        this.platforms4.forEach(elm => elm.drawPlatform())
 
     },
 
@@ -95,20 +115,55 @@ const game = {
     },
 
     generatePlatforms() {
+        // if (this.frameIndex % 80 === 0) {
+        //     this.platforms1.push(new Platform(this.ctx, 0 - this.canvasSize.canvasW / 3, this.canvasSize.canvasH - (this.canvasSize.canvasH / 4), this.canvasSize.canvasW / 6, 80, 30))
+        // }
+        // if (this.frameIndex % 100 === 0) {
+        //     this.platforms2.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - (this.canvasSize.canvasH / 2), this.canvasSize.canvasW / 6, 80, -30))
+        // }
+        // if (this.frameIndex % 100 === 0) {
+        //     this.platforms3.push(new Platform(this.ctx, 0 - this.canvasSize.canvasW / 3, this.canvasSize.canvasH - (this.canvasSize.canvasH / 1.3), this.canvasSize.canvasW / 6, 80, 30))
+        // }
         if (this.frameIndex % 80 === 0) {
-            this.platforms1.push(new Platform(this.ctx, 0 - this.canvasSize.canvasW / 3, this.canvasSize.canvasH - (this.canvasSize.canvasH / 4), this.canvasSize.canvasW / 6, 80, 30))
+            this.platforms4.push(new Platform(this.ctx, -300, 1400, 300, 80, 15))
         }
-        if (this.frameIndex % 100 === 0) {
-            this.platforms2.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - (this.canvasSize.canvasH / 2), this.canvasSize.canvasW / 6, 80, -30))
-        }
-        if (this.frameIndex % 100 === 0) {
-            this.platforms3.push(new Platform(this.ctx, 0 - this.canvasSize.canvasW / 3, this.canvasSize.canvasH - (this.canvasSize.canvasH / 1.3), this.canvasSize.canvasW / 6, 80, 30))
-        }
+
     },
 
     clearPlatforms() {
-        this.platforms1 = this.platforms1.filter(elm => elm.platformSpecs.pos.platformPosX < this.canvasSize.canvasW)
-        this.platforms2 = this.platforms2.filter(elm => elm.platformSpecs.pos.platformPosX > 0 + platformSpecs.size.platformW)
-        this.platforms3 = this.platforms3.filter(elm => elm.platformSpecs.pos.platformPosX < this.canvasSize.canvasW)
+        // this.platforms1 = this.platforms1.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
+        // this.platforms2 = this.platforms2.filter(elm => elm.platformSpecs.pos.platformX > 0 - elm.platformSpecs.size.platformW)
+        // this.platforms3 = this.platforms3.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
+        this.platforms4 = this.platforms4.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
+    },
+
+    platformColision() {
+        let playerDchaSupX = this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW
+        let playerDchaSupY = this.player.playerSpecs.pos.playerY
+        let playerIzdaSupX = this.player.playerSpecs.pos.playerX
+        let playerIzdaSupY = this.player.playerSpecs.pos.playerY
+        let playerDchaInfX = this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW
+        let playerDchaInfY = this.player.playerSpecs.pos.playerY - this.player.playerSpecs.size.playerH
+        let playerIzdaInfX = this.player.playerSpecs.pos.playerX
+        let playerIzdaInfY = this.player.playerSpecs.pos.playerY - this.player.playerSpecs.size.playerH
+
+        return this.platforms4.some(elm => {
+            let platformDchaSupX = elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW
+            let platformDchaSupY = elm.platformSpecs.pos.platformY
+            let platformIzdaSupX = elm.platformSpecs.pos.platformX
+            let platformIzdaSupY = elm.platformSpecs.pos.plarformY
+            let platformDchaInfX = elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW
+            let platformDchaInfY = elm.platformSpecs.pos.plarformY - elm.platformSpecs.size.platformH
+            let platformIzdaInfX = elm.platformSpecs.pos.platformX
+            let platformIzdaInfY = elm.platformSpecs.pos.platformY - elm.platformSpecs.size.platformH
+
+            return (
+                // ASI FUNCIONA CON EL CENTRO DEL MUÑECO 
+                platformIzdaSupX > playerIzdaSupX &&
+                platformIzdaSupX < playerDchaInfX &&
+                platformDchaSupY > playerDchaSupY &&
+                platformDchaSupY < this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH
+            )
+        })
     }
 }

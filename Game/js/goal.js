@@ -1,8 +1,8 @@
 class Goal {
-    constructor(ctx, goalPosX, goalPosY, goalW, goalH) {
+    constructor(ctx, goalX, goalY, goalW, goalH) {
         this.ctx = ctx
         this.goalSpecs = {
-            pos: { goalPosX: goalPosX, goalPosY: goalPosY },
+            pos: { goalX: goalX, goalY: goalY },
             size: { goalW: goalW, goalH: goalH }
         }
         this.instanceGoal()
@@ -16,8 +16,8 @@ class Goal {
     drawGoal() {
         this.ctx.drawImage(
             this.image,
-            this.goalSpecs.pos.goalPosX,
-            this.goalSpecs.pos.goalPosY,
+            this.goalSpecs.pos.goalX,
+            this.goalSpecs.pos.goalY,
             this.goalSpecs.size.goalW,
             this.goalSpecs.size.goalH
         )

@@ -1,9 +1,9 @@
 class Background {
-    constructor(ctx, backgroundPosX, backgroundPosY, backgroundW, backgroundH) {
+    constructor(ctx, backgroundX, backgroundY, backgroundW, backgroundH) {
         this.ctx = ctx;
 
         this.backgroundSpecs = {
-            pos: { backgroundPosX: backgroundPosX, backgroundPosY: backgroundPosY },
+            pos: { backgroundX: backgroundX, backgroundY: backgroundY },
             size: { backgroundW: backgroundW, backgroundH: backgroundH }
         }
         this.instanceBackground();
@@ -18,8 +18,8 @@ class Background {
     drawBackground() {
         this.ctx.drawImage(
             this.image,
-            this.backgroundSpecs.pos.backgroundPosX,
-            this.backgroundSpecs.pos.backgroundPosY,
+            this.backgroundSpecs.pos.backgroundX,
+            this.backgroundSpecs.pos.backgroundY,
             this.backgroundSpecs.size.backgroundW,
             this.backgroundSpecs.size.backgroundH
         )

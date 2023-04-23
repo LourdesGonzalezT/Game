@@ -1,9 +1,9 @@
 class Player {
-    constructor(ctx, playerPosX, playerPosY, playerW, playerH, canvasSize) {
+    constructor(ctx, playerX, playerY, playerW, playerH, canvasSize) {
         this.ctx = ctx;
         this.canvasSize = canvasSize
         this.playerSpecs = {
-            pos: { playerPosX: playerPosX, playerPosY: playerPosY },
+            pos: { playerX: playerX, playerY: playerY },
             size: { playerW: playerW, playerH: playerH },
             speedMove: 60,
             speedJump: 800,
@@ -23,20 +23,16 @@ class Player {
         this.fallPlayer()
         this.ctx.drawImage(
             this.image,
-            this.playerSpecs.pos.playerPosX,
-            this.playerSpecs.pos.playerPosY,
+            this.playerSpecs.pos.playerX,
+            this.playerSpecs.pos.playerY,
             this.playerSpecs.size.playerW,
             this.playerSpecs.size.playerH
         )
     }
 
     fallPlayer() {
-        if (this.playerSpecs.pos.playerPosY < this.canvasSize.canvasH - this.playerSpecs.size.playerH) {
-            this.playerSpecs.pos.playerPosY += this.playerSpecs.gravity
+        if (this.playerSpecs.pos.playerY < this.canvasSize.canvasH - this.playerSpecs.size.playerH) {
+            this.playerSpecs.pos.playerY += this.playerSpecs.gravity
         }
     }
-
-
-
-
 }

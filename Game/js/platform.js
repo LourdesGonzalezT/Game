@@ -1,8 +1,8 @@
 class Platform {
-    constructor(ctx, platformPosX, platformPosY, platformW, platformH, speed) {
+    constructor(ctx, platformX, platformY, platformW, platformH, speed) {
         this.ctx = ctx
         this.platformSpecs = {
-            pos: { platformPosX: platformPosX, platformPosY: platformPosY },
+            pos: { platformX: platformX, platformY: platformY },
             size: { platformW: platformW, platformH: platformH },
             speed: speed
         }
@@ -12,14 +12,14 @@ class Platform {
         this.move()
         this.ctx.fillStyle = "red"
         this.ctx.fillRect(
-            this.platformSpecs.pos.platformPosX,
-            this.platformSpecs.pos.platformPosY,
+            this.platformSpecs.pos.platformX,
+            this.platformSpecs.pos.platformY,
             this.platformSpecs.size.platformW,
             this.platformSpecs.size.platformH
         )
     }
     move() {
-        this.platformSpecs.pos.platformPosX += this.platformSpecs.speed
+        this.platformSpecs.pos.platformX += this.platformSpecs.speed
     }
 
 }
