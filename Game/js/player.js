@@ -5,11 +5,10 @@ class Player {
         this.playerSpecs = {
             pos: { playerX: playerX, playerY: playerY },
             size: { playerW: playerW, playerH: playerH },
-            speedMove: 60,
-            speedJump: 800,
-            gravity: 10
+            speedMove: 80,
+            speedJump: 500,
+            gravity: 10,
         }
-
         this.instancePlayer();
         this.drawPlayer();
     }
@@ -33,6 +32,12 @@ class Player {
     fallPlayer() {
         if (this.playerSpecs.pos.playerY < this.canvasSize.canvasH - this.playerSpecs.size.playerH) {
             this.playerSpecs.pos.playerY += this.playerSpecs.gravity
+        }
+    }
+    viewPlayer() {
+        if (this.playerSpecs.pos.playerX > 0 &&
+            this.playerSpecs.pos.playerX + this.playerSpecs.size.playerW < this.canvasSize.canvasW) {
+            return true
         }
     }
 }
