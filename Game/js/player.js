@@ -7,7 +7,7 @@ class Player {
             size: { playerW: playerW, playerH: playerH },
             speedMove: 60,
             speedJump: 800,
-            gravity: 15
+            gravity: 10
         }
 
         this.instancePlayer();

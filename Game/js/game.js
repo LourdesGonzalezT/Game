@@ -12,7 +12,7 @@ const game = {
     goal: undefined,
     // platforms1: [], // array vacío para almacenar plataformas
     // platforms2: [],
-    // platforms3: [],
+    platforms3: [],
     platforms4: [],
     canvasSize: {
         canvasW: undefined,
@@ -48,26 +48,26 @@ const game = {
             if (key == 'ArrowRight') {
                 this.moveLeft()
             }
-            if (key == ' ') {
-                this.jumping()
+            if (key == ' ' && this.playerPosition() === true) {
+                this.jump()
             }
         }
     },
+
+    jump() {
+        this.player.playerSpecs.pos.playerY -= this.player.playerSpecs.speedJump
+    },
+
     moveRight() {
         if (this.player.playerSpecs.pos.playerX > 0) {
             this.player.playerSpecs.pos.playerX -= this.player.playerSpecs.speedMove
         }
     },
+
     moveLeft() {
         if (this.player.playerSpecs.pos.playerX < this.canvasSize.canvasW - this.player.playerSpecs.size.playerW) {
             this.player.playerSpecs.pos.playerX += this.player.playerSpecs.speedMove
         }
-    },
-    jumping() {
-        if (this.player.playerSpecs.pos.playerY > 0) { // deberá saltar sólo cuando colisione con plataforma o suelo
-            this.player.playerSpecs.pos.playerY -= this.player.playerSpecs.speedJump
-        }
-
     },
 
     start() {
@@ -78,15 +78,14 @@ const game = {
             this.drawAll()
             this.generatePlatforms()
             this.clearPlatforms()
-            this.platformColision()
-            if (this.platformColision() === true) {
+            this.platformColision4()
+            if (this.platformColision4() === true) {
                 this.player.playerSpecs.pos.playerX += 15
                 this.player.playerSpecs.gravity = 0
             } else {
                 this.player.playerSpecs.gravity = 10
             }
         }, 1000 / this.FPS)
-
     },
 
     reset() {
@@ -96,7 +95,7 @@ const game = {
 
         //this.platforms1 = []
         //this.platforms2 = []
-        // this.platforms3 = []
+        this.platforms3 = []
         this.platforms4 = []
     },
 
@@ -106,7 +105,7 @@ const game = {
         this.goal.drawGoal()
         //  this.platforms1.forEach(elm => elm.drawPlatform())
         // this.platforms2.forEach(elm => elm.drawPlatform())
-        //this.platforms3.forEach(elm => elm.drawPlatform())
+        this.platforms3.forEach(elm => elm.drawPlatform())
         this.platforms4.forEach(elm => elm.drawPlatform())
 
     },
@@ -122,11 +121,11 @@ const game = {
         // if (this.frameIndex % 100 === 0) {
         //     this.platforms2.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - (this.canvasSize.canvasH / 2), this.canvasSize.canvasW / 6, 80, -30))
         // }
-        // if (this.frameIndex % 100 === 0) {
-        //     this.platforms3.push(new Platform(this.ctx, 0 - this.canvasSize.canvasW / 3, this.canvasSize.canvasH - (this.canvasSize.canvasH / 1.3), this.canvasSize.canvasW / 6, 80, 30))
-        // }
         if (this.frameIndex % 80 === 0) {
-            this.platforms4.push(new Platform(this.ctx, -300, 1400, 300, 80, 15))
+            this.platforms3.push(new Platform(this.ctx, -300, 1200, 500, 80, 15, "green"))
+        }
+        if (this.frameIndex % 80 === 0) {
+            this.platforms4.push(new Platform(this.ctx, -300, 2000, 300, 80, 15, "red"))
         }
 
     },
@@ -134,22 +133,27 @@ const game = {
     clearPlatforms() {
         // this.platforms1 = this.platforms1.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
         // this.platforms2 = this.platforms2.filter(elm => elm.platformSpecs.pos.platformX > 0 - elm.platformSpecs.size.platformW)
-        // this.platforms3 = this.platforms3.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
+        this.platforms3 = this.platforms3.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
         this.platforms4 = this.platforms4.filter(elm => elm.platformSpecs.pos.platformX < this.canvasSize.canvasW)
     },
 
-    platformColision() {
-
+    platformColision4() {
         return this.platforms4.some(elm => {
-
             return (
-
                 this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > elm.platformSpecs.pos.platformX &&
                 this.player.playerSpecs.pos.playerX < elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW &&
                 this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > elm.platformSpecs.pos.platformY - 10 &&
                 this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < elm.platformSpecs.pos.platformY + 10
-
             )
         })
-    }
+    },
+
+    playerPosition() {
+        if (this.player.playerSpecs.pos.playerY === this.canvasSize.canvasH - this.player.playerSpecs.size.playerH ||
+            this.platformColision4()) {
+            return true
+        } else {
+            return false
+        }
+    },
 }
