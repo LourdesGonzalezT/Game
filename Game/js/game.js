@@ -11,7 +11,7 @@ const game = {
     player: undefined,
     goal: undefined,
     // platforms1: [], // array vacío para almacenar plataformas
-    //  platforms2: [],
+    // platforms2: [],
     // platforms3: [],
     platforms4: [],
     canvasSize: {
@@ -40,7 +40,7 @@ const game = {
     },
 
     setEventListeners() {
-        document.onkeyup = event => {
+        document.onkeydown = event => {
             const { key } = event
             if (key == 'ArrowLeft') {
                 this.moveRight()
@@ -83,7 +83,7 @@ const game = {
                 this.player.playerSpecs.pos.playerX += 15
                 this.player.playerSpecs.gravity = 0
             } else {
-                this.player.playerSpecs.gravity = 15
+                this.player.playerSpecs.gravity = 10
             }
         }, 1000 / this.FPS)
 
@@ -93,6 +93,7 @@ const game = {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
         this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 500, 500, 500, this.canvasSize)
         this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 300, 100, 200, 200)
+
         //this.platforms1 = []
         //this.platforms2 = []
         // this.platforms3 = []
@@ -138,31 +139,16 @@ const game = {
     },
 
     platformColision() {
-        let playerDchaSupX = this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW
-        let playerDchaSupY = this.player.playerSpecs.pos.playerY
-        let playerIzdaSupX = this.player.playerSpecs.pos.playerX
-        let playerIzdaSupY = this.player.playerSpecs.pos.playerY
-        let playerDchaInfX = this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW
-        let playerDchaInfY = this.player.playerSpecs.pos.playerY - this.player.playerSpecs.size.playerH
-        let playerIzdaInfX = this.player.playerSpecs.pos.playerX
-        let playerIzdaInfY = this.player.playerSpecs.pos.playerY - this.player.playerSpecs.size.playerH
 
         return this.platforms4.some(elm => {
-            let platformDchaSupX = elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW
-            let platformDchaSupY = elm.platformSpecs.pos.platformY
-            let platformIzdaSupX = elm.platformSpecs.pos.platformX
-            let platformIzdaSupY = elm.platformSpecs.pos.plarformY
-            let platformDchaInfX = elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW
-            let platformDchaInfY = elm.platformSpecs.pos.plarformY - elm.platformSpecs.size.platformH
-            let platformIzdaInfX = elm.platformSpecs.pos.platformX
-            let platformIzdaInfY = elm.platformSpecs.pos.platformY - elm.platformSpecs.size.platformH
 
             return (
-                // ASI FUNCIONA CON EL CENTRO DEL MUÑECO 
-                platformIzdaSupX > playerIzdaSupX &&
-                platformIzdaSupX < playerDchaInfX &&
-                platformDchaSupY > playerDchaSupY &&
-                platformDchaSupY < this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH
+
+                this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > elm.platformSpecs.pos.platformX &&
+                this.player.playerSpecs.pos.playerX < elm.platformSpecs.pos.platformX + elm.platformSpecs.size.platformW &&
+                this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > elm.platformSpecs.pos.platformY - 10 &&
+                this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < elm.platformSpecs.pos.platformY + 10
+
             )
         })
     }
