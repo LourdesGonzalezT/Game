@@ -9,11 +9,11 @@ const game = {
     FPS: 60,
     background: undefined,
     player: undefined,
-    goals: [],
     platforms1: [],
     platforms2: [],
     platforms3: [],
     platforms4: [],
+    enemies1: [],
     canvasSize: {
         canvasW: undefined,
         canvasH: undefined,
@@ -76,8 +76,8 @@ const game = {
             this.frameIndex > 5000 ? this.frameIndex = 0 : this.frameIndex++
             this.clearAll()
             this.drawAll()
-            // this.player.viewPlayer()
             this.generatePlatforms()
+            this.generateEnemies()
             this.clearPlatforms()
             this.platformColisionUp4()
             if (this.platformColisionUp4() && this.player.viewPlayer()) {
@@ -106,7 +106,10 @@ const game = {
             if (this.goalColision() === true) {
                 this.player.playerSpecs.gravity = 0
             }
-
+            this.enemieColision1()
+            if (this.enemieColision1()) {
+                console.log("pum")
+            }
         }, 1000 / this.FPS)
     },
 
@@ -114,11 +117,6 @@ const game = {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
         this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 300, 300, 300, this.canvasSize)
         this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 600, 400, 50, "white")
-
-        this.platforms1 = []
-        this.platforms2 = []
-        this.platforms3 = []
-        this.platforms4 = []
     },
 
     drawAll() {
@@ -129,11 +127,20 @@ const game = {
         this.platforms2.forEach(elm => elm.drawPlatform())
         this.platforms3.forEach(elm => elm.drawPlatform())
         this.platforms4.forEach(elm => elm.drawPlatform())
+        this.enemies1.forEach(elm => elm.drawEnemie())
 
     },
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
+    },
+
+    generateEnemies() {
+        if (this.enemies1.length < 5) {
+            if (this.frameIndex % 150 === 0) {
+                this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 200, 200, 20, 5, "grey"))
+            }
+        }
     },
 
     generatePlatforms() {
@@ -210,6 +217,17 @@ const game = {
             this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > this.goal.goalSpecs.pos.goalY - 10 &&
             this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < this.goal.goalSpecs.pos.goalY + 10
         )
+    },
+
+    enemieColision1() {
+        return this.enemies1.some(elm => {
+            return (
+                this.player.playerSpecs.pos.playerX < elm.enemieSpecs.pos.enemieX + elm.enemieSpecs.size.enemieW &&
+                this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > elm.enemieSpecs.pos.enemieX &&
+                this.player.playerSpecs.pos.playerY < elm.enemieSpecs.pos.enemieY + elm.enemieSpecs.size.enemieH &&
+                this.player.playerSpecs.size.playerH + this.player.playerSpecs.pos.playerY > elm.enemieSpecs.pos.enemieY
+            )
+        })
     },
     playerPosition() {
         if (this.player.playerSpecs.pos.playerY === this.canvasSize.canvasH - this.player.playerSpecs.size.playerH ||
