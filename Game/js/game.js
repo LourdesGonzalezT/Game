@@ -105,6 +105,10 @@ const game = {
             this.goalColision()
             if (this.goalColision() === true) {
                 this.player.playerSpecs.gravity = 0
+                clearInterval(playing)
+                if (confirm("YOU WIN!! ¿Quieres jugar otra vez?") === true) {
+                    this.init()
+                }
             }
             this.enemieColision1()
             if (this.player.playerSpecs.liveCounter > 0) {
@@ -113,13 +117,13 @@ const game = {
                     console.log(this.player.playerSpecs.liveCounter)
                 }
             }
-            //else {
-            // if (confirm("game over ¿Quieres jugar otra vez?") === true) {
-            //   clearInterval(playing)
-            // this.clearAll()
-            //  this.start()
-            //}
-            // }
+            else {
+                clearInterval(playing)
+                if (confirm("game over ¿Quieres jugar otra vez?") === true) {
+
+                    this.init()
+                }
+            }
         }, 1000 / this.FPS)
     },
 
@@ -127,6 +131,11 @@ const game = {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
         this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize)
         this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 400, 400, 50, "white")
+        this.enemies1 = []
+        this.platforms1 = []
+        this.platforms2 = []
+        this.platforms3 = []
+        this.platforms4 = []
     },
 
     drawAll() {

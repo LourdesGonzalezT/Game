@@ -8,7 +8,7 @@ class Player {
             speedMove: 80,
             speedJump: 500,
             gravity: 10,
-            liveCounter: 25,
+            liveCounter: 100,
         }
         this.instancePlayer();
         this.drawPlayer();
@@ -20,6 +20,7 @@ class Player {
     }
 
     drawPlayer() {
+        this.drawLifeBar()
         this.fallPlayer()
         this.ctx.drawImage(
             this.image,
@@ -28,6 +29,9 @@ class Player {
             this.playerSpecs.size.playerW,
             this.playerSpecs.size.playerH
         )
+    }
+    drawLifeBar() {
+        document.querySelector('#scoreBar').style.width = `${this.playerSpecs.liveCounter}%`
     }
 
     fallPlayer() {
