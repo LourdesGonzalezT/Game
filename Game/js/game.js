@@ -113,8 +113,7 @@ const game = {
             this.enemieColision1()
             if (this.player.playerSpecs.liveCounter > 0) {
                 if (this.enemieColision1()) {
-                    this.player.playerSpecs.liveCounter -= 1
-                    console.log(this.player.playerSpecs.liveCounter)
+                    this.player.playerSpecs.liveCounter -= 0.5
                 }
             }
             else {
