@@ -8,6 +8,7 @@ class Player {
             speedMove: 80,
             speedJump: 500,
             gravity: 10,
+            liveCounter: 25,
         }
         this.instancePlayer();
         this.drawPlayer();

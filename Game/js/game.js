@@ -33,7 +33,7 @@ const game = {
     setDimensions() {
         this.canvasSize = {
             canvasW: window.innerWidth,
-            canvasH: window.innerHeight,
+            canvasH: window.innerHeight - 200,
         }
         document.querySelector('canvas').setAttribute('width', this.canvasSize.canvasW)
         document.querySelector('canvas').setAttribute('height', this.canvasSize.canvasH)
@@ -72,7 +72,7 @@ const game = {
 
     start() {
         this.reset()
-        setInterval(() => {
+        let playing = setInterval(() => {
             this.frameIndex > 5000 ? this.frameIndex = 0 : this.frameIndex++
             this.clearAll()
             this.drawAll()
@@ -107,16 +107,26 @@ const game = {
                 this.player.playerSpecs.gravity = 0
             }
             this.enemieColision1()
-            if (this.enemieColision1()) {
-                console.log("pum")
+            if (this.player.playerSpecs.liveCounter > 0) {
+                if (this.enemieColision1()) {
+                    this.player.playerSpecs.liveCounter -= 1
+                    console.log(this.player.playerSpecs.liveCounter)
+                }
             }
+            //else {
+            // if (confirm("game over ¿Quieres jugar otra vez?") === true) {
+            //   clearInterval(playing)
+            // this.clearAll()
+            //  this.start()
+            //}
+            // }
         }, 1000 / this.FPS)
     },
 
     reset() {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
-        this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 300, 300, 300, this.canvasSize)
-        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 600, 400, 50, "white")
+        this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize)
+        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 400, 400, 50, "white")
     },
 
     drawAll() {
@@ -128,7 +138,6 @@ const game = {
         this.platforms3.forEach(elm => elm.drawPlatform())
         this.platforms4.forEach(elm => elm.drawPlatform())
         this.enemies1.forEach(elm => elm.drawEnemie())
-
     },
 
     clearAll() {
@@ -145,16 +154,16 @@ const game = {
 
     generatePlatforms() {
         if (this.frameIndex % 80 === 0) {
-            this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, 800, 700, 80, -15, "blue"))
+            this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 80, -15, "blue"))
         }
         if (this.frameIndex % 120 === 0) {
-            this.platforms2.push(new Platform(this.ctx, -300, 1200, 500, 80, 15, "yellow"))
+            this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 80, 15, "yellow"))
         }
         if (this.frameIndex % 100 === 0) {
-            this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, 1600, 600, 80, -15, "green"))
+            this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 80, -15, "green"))
         }
         if (this.frameIndex % 80 === 0) {
-            this.platforms4.push(new Platform(this.ctx, -300, 2000, 500, 80, 15, "red"))
+            this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 80, 15, "red"))
         }
 
     },

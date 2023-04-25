@@ -7,7 +7,8 @@ class Enemie {
             size: { enemieW: enemieW, enemieH: enemieH },
             speedX: speedX,
             speedY: speedY,
-            color: color
+            color: color,
+            damage: 10
         }
         this.drawEnemie();
     }
