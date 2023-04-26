@@ -34,7 +34,6 @@ class Enemie {
     turnVertical() {
         this.enemieSpecs.speedY *= -1
     }
-
     turnHorizontal() {
         this.enemieSpecs.speedX *= -1
     }

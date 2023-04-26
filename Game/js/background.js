@@ -24,5 +24,4 @@ class Background {
             this.backgroundSpecs.size.backgroundH
         )
     }
-
 }

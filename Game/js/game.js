@@ -9,6 +9,7 @@ const game = {
     FPS: 60,
     background: undefined,
     player: undefined,
+    playing: undefined,
     platforms1: [],
     platforms2: [],
     platforms3: [],
@@ -23,6 +24,8 @@ const game = {
         this.setContext()
         this.setDimensions()
         this.setEventListeners()
+        this.reset()
+        this.playing && clearInterval(this.playing)
         this.start()
     },
 
@@ -71,8 +74,8 @@ const game = {
     },
 
     start() {
-        this.reset()
-        let playing = setInterval(() => {
+
+        this.playing = setInterval(() => {
             this.frameIndex > 5000 ? this.frameIndex = 0 : this.frameIndex++
             this.clearAll()
             this.drawAll()
@@ -105,7 +108,7 @@ const game = {
             this.goalColision()
             if (this.goalColision() === true) {
                 this.player.playerSpecs.gravity = 0
-                clearInterval(playing)
+                clearInterval(this.playing)
                 if (confirm("YOU WIN!! ¿Quieres jugar otra vez?") === true) {
                     this.init()
                 }
@@ -113,15 +116,21 @@ const game = {
             this.enemieColision1()
             if (this.player.playerSpecs.liveCounter > 0) {
                 if (this.enemieColision1()) {
-                    this.player.playerSpecs.liveCounter -= 0.5
+                    this.player.playerSpecs.liveCounter -= 1
                 }
             }
             else {
-                clearInterval(playing)
-                if (confirm("game over ¿Quieres jugar otra vez?") === true) {
+                this.ctx.fillStyle = "red"
+                this.ctx.fillRect(this.canvasSize.canvasW / 2 - 750, this.canvasSize.canvasH / 2 - 750, 1500, 1500)
+                this.ctx.fillStyle = "black"
+                this.ctx.font = '100px arial'
+                this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 300, this.canvasSize.canvasH / 2)
+                clearInterval(this.playing)
+                // clearInterval(playing)
+                //if (confirm("game over ¿Quieres jugar otra vez?") === true) {
 
-                    this.init()
-                }
+                //this.init()
+                //}
             }
         }, 1000 / this.FPS)
     },
