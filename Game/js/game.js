@@ -5,6 +5,7 @@ const game = {
     license: undefined,
     description: 'Platform game for domies',
     ctx: undefined,
+    level: 0,
     frameIndex: 0,
     FPS: 60,
     background: undefined,
@@ -83,12 +84,22 @@ const game = {
             this.generateEnemies()
             this.clearPlatforms()
             this.platformColisionUp4()
-            if (this.platformColisionUp4() && this.player.viewPlayer()) {
+
+            if (this.level === 0 && this.platformColisionUp4() && this.player.viewPlayer()) {
                 this.player.playerSpecs.pos.playerX += 15
                 this.player.playerSpecs.gravity = 0
             } else {
                 this.player.playerSpecs.gravity = 10
             }
+            if (this.level === 1 && this.platformColisionUp4() && this.player.viewPlayer()) {
+                this.player.playerSpecs.pos.playerX += 10
+                this.player.playerSpecs.gravity = 0
+            }
+            if (this.level === 2 && this.platformColisionUp4() && this.player.viewPlayer()) {
+                this.player.playerSpecs.pos.playerX += 10
+                this.player.playerSpecs.gravity = 0
+            }
+
             this.platformColisionUp3()
             if (this.platformColisionUp3() && this.player.viewPlayer()) {
                 this.player.playerSpecs.pos.playerX -= 15
@@ -101,15 +112,25 @@ const game = {
             }
 
             this.platformColisionUp1()
-            if (this.platformColisionUp1() && this.player.viewPlayer()) {
+            if (this.level === 0 && this.platformColisionUp1() && this.player.viewPlayer()) {
                 this.player.playerSpecs.pos.playerX -= 15
                 this.player.playerSpecs.gravity = 0
             }
+            if (this.level === 1 && this.platformColisionUp1() && this.player.viewPlayer()) {
+                this.player.playerSpecs.pos.playerX += 5
+                this.player.playerSpecs.gravity = 0
+            }
+            if (this.level === 2 && this.platformColisionUp1() && this.player.viewPlayer()) {
+                this.player.playerSpecs.pos.playerX += 5
+                this.player.playerSpecs.gravity = 0
+            }
+
             this.goalColision()
             if (this.goalColision() === true) {
                 this.player.playerSpecs.gravity = 0
                 clearInterval(this.playing)
-                if (confirm("YOU WIN!! ¿Quieres jugar otra vez?") === true) {
+                if (confirm("Nivel Completado!") === true) {
+                    this.level++
                     this.init()
                 }
             }
@@ -156,25 +177,72 @@ const game = {
     },
 
     generateEnemies() {
-        if (this.enemies1.length < 5) {
-            if (this.frameIndex % 150 === 0) {
-                this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 200, 200, 20, 5, "grey"))
+        if (this.level === 0) {
+            if (this.enemies1.length < 5) {
+                if (this.frameIndex % 150 === 0) {
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 200, 200, 20, 5, "grey", this.level))
+                }
             }
         }
+        if (this.level === 1) {
+            if (this.enemies1.length < 10) {
+                if (this.frameIndex % 150 === 0) {
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 400, 400, 30, 10, "grey", this.level))
+                }
+            }
+        }
+        if (this.level === 2) {
+            if (this.enemies1.length < 5) {
+                if (this.frameIndex % 150 === 0) {
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 800, 800, 30, 10, "grey", this.level))
+                }
+            }
+        }
+
     },
 
     generatePlatforms() {
-        if (this.frameIndex % 80 === 0) {
-            this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 120, -15, "blue"))
+        if (this.level === 0) {
+            if (this.frameIndex % 80 === 0) {
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 120, -15, "blue"))
+            }
+            if (this.frameIndex % 120 === 0) {
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+            }
+            if (this.frameIndex % 100 === 0) {
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+            }
+            if (this.frameIndex % 80 === 0) {
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 120, 15, "red"))
+            }
         }
-        if (this.frameIndex % 120 === 0) {
-            this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+        if (this.level === 1) {
+            if (this.frameIndex % 80 === 0) {
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15, "blue"))
+            }
+            if (this.frameIndex % 120 === 0) {
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+            }
+            if (this.frameIndex % 100 === 0) {
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+            }
+            if (this.frameIndex % 80 === 0) {
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15, "red"))
+            }
         }
-        if (this.frameIndex % 100 === 0) {
-            this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
-        }
-        if (this.frameIndex % 80 === 0) {
-            this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 120, 15, "red"))
+        if (this.level === 2) {
+            if (this.frameIndex % 80 === 0) {
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15, "blue"))
+            }
+            if (this.frameIndex % 120 === 0) {
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+            }
+            if (this.frameIndex % 100 === 0) {
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+            }
+            if (this.frameIndex % 80 === 0) {
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15, "red"))
+            }
         }
 
     },

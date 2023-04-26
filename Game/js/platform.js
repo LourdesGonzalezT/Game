@@ -16,7 +16,6 @@ class Platform {
     }
     drawPlatform() {
         this.move()
-        // this.ctx.fillStyle = this.platformSpecs.color
         this.ctx.drawImage(
             this.image,
             this.platformSpecs.pos.platformX,
