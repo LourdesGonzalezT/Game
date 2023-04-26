@@ -49,6 +49,7 @@ img {
 }
 
 #button-start {
+    background-image: url(../img/button.png);
     color: black;
     text-decoration: none;
     letter-spacing: 2px;

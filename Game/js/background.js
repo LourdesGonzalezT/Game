@@ -12,7 +12,7 @@ class Background {
 
     instanceBackground() {
         this.image = new Image();
-        this.image.src = "./img/ORS97Z0.jpg"
+        this.image.src = "./img/desert_bg2.png"
     }
 
     drawBackground() {

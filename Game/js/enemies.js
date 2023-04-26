@@ -10,13 +10,17 @@ class Enemie {
             color: color,
             damage: 10
         }
+        this.instanceEnimie()
         this.drawEnemie();
     }
-
+    instanceEnimie() {
+        this.image = new Image();
+        this.image.src = "./img/pinguino.png"
+    }
     drawEnemie() {
         this.moveEnemie()
-        this.ctx.fillStyle = this.enemieSpecs.color
-        this.ctx.fillRect(
+        this.ctx.drawImage(
+            this.image,
             this.enemieSpecs.pos.enemieX,
             this.enemieSpecs.pos.enemieY,
             this.enemieSpecs.size.enemieW,

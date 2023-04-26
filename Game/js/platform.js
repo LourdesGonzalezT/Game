@@ -7,12 +7,18 @@ class Platform {
             speed: speed,
             color: color
         }
+        this.instancePlatform();
         this.drawPlatform();
+    }
+    instancePlatform() {
+        this.image = new Image();
+        this.image.src = "./img/platform1.png"
     }
     drawPlatform() {
         this.move()
-        this.ctx.fillStyle = this.platformSpecs.color
-        this.ctx.fillRect(
+        // this.ctx.fillStyle = this.platformSpecs.color
+        this.ctx.drawImage(
+            this.image,
             this.platformSpecs.pos.platformX,
             this.platformSpecs.pos.platformY,
             this.platformSpecs.size.platformW,

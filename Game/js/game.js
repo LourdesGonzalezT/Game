@@ -138,7 +138,7 @@ const game = {
     reset() {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
         this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize)
-        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 400, 400, 50, "white")
+        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 300, 800, 400, "white")
         this.enemies1 = []
         this.platforms1 = []
         this.platforms2 = []
@@ -171,16 +171,16 @@ const game = {
 
     generatePlatforms() {
         if (this.frameIndex % 80 === 0) {
-            this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 80, -15, "blue"))
+            this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 120, -15, "blue"))
         }
         if (this.frameIndex % 120 === 0) {
-            this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 80, 15, "yellow"))
+            this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
         }
         if (this.frameIndex % 100 === 0) {
-            this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 80, -15, "green"))
+            this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
         }
         if (this.frameIndex % 80 === 0) {
-            this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 80, 15, "red"))
+            this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 120, 15, "red"))
         }
 
     },
@@ -238,10 +238,10 @@ const game = {
 
     goalColision() {
         return (
-            this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > this.goal.goalSpecs.pos.goalX &&
-            this.player.playerSpecs.pos.playerX < this.goal.goalSpecs.pos.goalX + this.goal.goalSpecs.size.goalW &&
-            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > this.goal.goalSpecs.pos.goalY - 10 &&
-            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < this.goal.goalSpecs.pos.goalY + 10
+            this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > this.goal.goalSpecs.pos.goalX + 60 &&
+            this.player.playerSpecs.pos.playerX < this.goal.goalSpecs.pos.goalX + this.goal.goalSpecs.size.goalW - 60 &&
+            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > this.goal.goalSpecs.pos.goalY - 10 + 120 &&
+            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < this.goal.goalSpecs.pos.goalY + 10 + 120
         )
     },
 

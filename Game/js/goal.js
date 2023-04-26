@@ -6,29 +6,21 @@ class Goal {
             size: { goalW: goalW, goalH: goalH },
             color: color
         }
-        // this.instanceGoal()
+        this.instanceGoal()
         this.drawGoal()
     }
-    // instanceGoal() {
-    //     this.image = new Image();
-    //     this.image.src = "./img/seta.png"
+    instanceGoal() {
+        this.image = new Image();
+        this.image.src = "./img/nenufar.png"
+    }
 
-    // }
-    // drawGoal() {
-    //     this.ctx.drawImage(
-    //         this.image,
-    //         this.goalSpecs.pos.goalX,
-    //         this.goalSpecs.pos.goalY,
-    //         this.goalSpecs.size.goalW,
-    //         this.goalSpecs.size.goalH
-    //     )
-    // }
     drawGoal() {
-        this.ctx.fillStyle = this.goalSpecs.color
-        this.ctx.fillRect(
+        this.ctx.drawImage(
+            this.image,
             this.goalSpecs.pos.goalX,
             this.goalSpecs.pos.goalY,
             this.goalSpecs.size.goalW,
-            this.goalSpecs.size.goalH)
+            this.goalSpecs.size.goalH
+        )
     }
 }

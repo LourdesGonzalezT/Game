@@ -16,7 +16,7 @@ class Player {
 
     instancePlayer() {
         this.image = new Image();
-        this.image.src = "./img/turttle.jpg"
+        this.image.src = "./img/rana.png"
     }
 
     drawPlayer() {
