@@ -13,43 +13,44 @@ img {
     height: 100%;
 }
 
-.barra {
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+.box1 {
+    background-image: url(../img/patronrana.jpeg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 150px;
+    font-weight: bold;
+    text-align: center
 }
 
-.text {
-    background-color: white;
-    width: 100%;
-    font-size: 90px;
-    text-align: right;
-    padding-right: 5%;
-}
 
-.text2 {
-    width: 100%;
-    background-color: white;
-    font-size: 90px;
-}
 
-.scoreBarContainer {
+.box2 {
+
     background-color: black;
-    width: 100%;
+}
+
+.box3 {
+    background-image: url(../img/patronrana.jpeg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #scoreBar {
 
     width: 100%;
-    background-color: red;
-    height: 80px;
+    background-color: green;
+    height: 100%;
 }
 
 #button-start {
-    background-image: url(../img/button.png);
+    background-image: url(../img/patronrana.jpeg);
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    font-size: 150px;
+    /* background-image: url(../img/button.png);
     color: black;
     text-decoration: none;
     letter-spacing: 2px;
@@ -59,5 +60,5 @@ img {
     padding: auto;
     display: block;
     width: 150px;
-    margin: 0 auto;
+    margin: 0 auto; */
 }

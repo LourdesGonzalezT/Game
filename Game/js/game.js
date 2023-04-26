@@ -120,17 +120,11 @@ const game = {
                 }
             }
             else {
-                this.ctx.fillStyle = "red"
-                this.ctx.fillRect(this.canvasSize.canvasW / 2 - 750, this.canvasSize.canvasH / 2 - 750, 1500, 1500)
-                this.ctx.fillStyle = "black"
-                this.ctx.font = '100px arial'
-                this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 300, this.canvasSize.canvasH / 2)
-                clearInterval(this.playing)
-                // clearInterval(playing)
-                //if (confirm("game over ¿Quieres jugar otra vez?") === true) {
 
-                //this.init()
-                //}
+                this.ctx.fillStyle = "black"
+                this.ctx.font = '200px arial'
+                this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 500, this.canvasSize.canvasH / 2)
+                clearInterval(this.playing)
             }
         }, 1000 / this.FPS)
     },

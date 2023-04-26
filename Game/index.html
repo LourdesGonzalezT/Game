@@ -13,26 +13,29 @@
 
 <body>
     <canvas></canvas>
+
     <div id="div-sup">
         <img src="./img/desert_bg2.png" alt="">
     </div>
 
-    <div class="barra">
+    <div class="row">
 
-        <div class="text">
-            <p>LIFE:</p>
+        <div class="col-4 box1">
+            LIFE LEVEL
         </div>
 
-        <div class="scoreBarContainer">
+        <div class="col-4 box2">
+
             <div id="scoreBar"></div>
+
         </div>
 
-        <div class="text2">
-
-            <a href="#" id="button-start">start</a>
+        <div class="col-4 box3">
+            <a href="#" class="btn btn-block" id="button-start">START</a>
         </div>
 
     </div>
+
 
     <script src="./js/background.js"></script>
     <script src="./js/platform.js"></script>
