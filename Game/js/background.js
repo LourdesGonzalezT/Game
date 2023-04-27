@@ -7,9 +7,9 @@ class Background {
             size: { backgroundW: backgroundW, backgroundH: backgroundH }
         }
         this.level = level,
-            this.instanceBackground();
+            this.instanceBackground()
         this.instanceAudioBackground()
-        this.drawBackground();
+        this.drawBackground()
     }
     instanceAudioBackground() {
         this.audioBackground = new Audio()
@@ -18,6 +18,9 @@ class Background {
     playAudioBackground() {
         this.audioBackground.play()
         this.audioBackground.volume -= 0.8
+    }
+    stopAudioBackground() {
+        this.audioBackground.pause()
     }
 
     instanceBackground() {
@@ -33,7 +36,6 @@ class Background {
             this.image = new Image();
             this.image.src = "./img/farm-bg.jpg"
         }
-
     }
 
     drawBackground() {

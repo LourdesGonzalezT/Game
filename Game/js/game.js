@@ -76,6 +76,7 @@ const game = {
     },
 
     start() {
+
         this.background.playAudioBackground()
 
         this.playing = setInterval(() => {
@@ -128,15 +129,37 @@ const game = {
             }
 
             this.goalColision()
-            if (this.goalColision() === true) {
+            if (this.goalColision() === true && this.level === 0) {
                 this.player.playerSpecs.gravity = 0
                 clearInterval(this.playing)
+                this.background.stopAudioBackground()
                 this.player.playAudioGoal()
                 if (confirm("Nivel Completado!") === true) {
                     this.level++
                     this.init()
                 }
             }
+            if (this.goalColision() === true && this.level === 1) {
+                this.player.playerSpecs.gravity = 0
+                clearInterval(this.playing)
+                this.background.stopAudioBackground()
+                this.player.playAudioGoal()
+                if (confirm("Nivel Completado!") === true) {
+                    this.level++
+                    this.init()
+                }
+            }
+            if (this.goalColision() === true && this.level === 2) {
+                this.player.playerSpecs.gravity = 0
+
+                clearInterval(this.playing)
+                this.background.stopAudioBackground()
+                this.clearAll()
+
+                this.goal.drawWinner()
+                this.player.playAudioGoal()
+            }
+
             this.enemieColision1()
             if (this.player.playerSpecs.liveCounter > 0) {
                 if (this.enemieColision1()) {
@@ -149,6 +172,7 @@ const game = {
                 this.ctx.fillStyle = "black"
                 this.ctx.font = '200px arial'
                 this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 500, this.canvasSize.canvasH / 2)
+                this.background.stopAudioBackground()
                 clearInterval(this.playing)
             }
         }, 1000 / this.FPS)
@@ -157,7 +181,7 @@ const game = {
     reset() {
         this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH, this.level)
         this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize, this.level)
-        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 300, 800, 400, "white")
+        this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 300, 800, 400, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
         this.enemies1 = []
         this.platforms1 = []
         this.platforms2 = []
@@ -208,44 +232,44 @@ const game = {
     generatePlatforms() {
         if (this.level === 0) {
             if (this.frameIndex % 80 === 0) {
-                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 120, -15, "blue"))
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 700, 120, -15))
             }
             if (this.frameIndex % 120 === 0) {
-                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15))
             }
             if (this.frameIndex % 100 === 0) {
-                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15))
             }
             if (this.frameIndex % 80 === 0) {
-                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 120, 15, "red"))
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 500, 120, 15))
             }
         }
         if (this.level === 1) {
             if (this.frameIndex % 80 === 0) {
-                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15, "blue"))
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15))
             }
             if (this.frameIndex % 120 === 0) {
-                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15))
             }
             if (this.frameIndex % 100 === 0) {
-                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15))
             }
             if (this.frameIndex % 80 === 0) {
-                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15, "red"))
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15))
             }
         }
         if (this.level === 2) {
             if (this.frameIndex % 80 === 0) {
-                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15, "blue"))
+                this.platforms1.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.5, 350, 120, -15))
             }
             if (this.frameIndex % 120 === 0) {
-                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15, "yellow"))
+                this.platforms2.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 1.9, 500, 120, 15))
             }
             if (this.frameIndex % 100 === 0) {
-                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15, "green"))
+                this.platforms3.push(new Platform(this.ctx, this.canvasSize.canvasW, this.canvasSize.canvasH - this.canvasSize.canvasH / 2.8, 600, 120, -15))
             }
             if (this.frameIndex % 80 === 0) {
-                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15, "red"))
+                this.platforms4.push(new Platform(this.ctx, -300, this.canvasSize.canvasH - this.canvasSize.canvasH / 6, 700, 120, 15))
             }
         }
 

@@ -1,11 +1,10 @@
 class Platform {
-    constructor(ctx, platformX, platformY, platformW, platformH, speed, color) {
+    constructor(ctx, platformX, platformY, platformW, platformH, speed) {
         this.ctx = ctx
         this.platformSpecs = {
             pos: { platformX: platformX, platformY: platformY },
             size: { platformW: platformW, platformH: platformH },
             speed: speed,
-            color: color
         }
         this.instancePlatform();
         this.drawPlatform();
