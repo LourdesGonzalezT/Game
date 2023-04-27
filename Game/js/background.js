@@ -1,18 +1,30 @@
 class Background {
-    constructor(ctx, backgroundX, backgroundY, backgroundW, backgroundH) {
+    constructor(ctx, backgroundX, backgroundY, backgroundW, backgroundH, level) {
         this.ctx = ctx;
 
         this.backgroundSpecs = {
             pos: { backgroundX: backgroundX, backgroundY: backgroundY },
             size: { backgroundW: backgroundW, backgroundH: backgroundH }
         }
-        this.instanceBackground();
+        this.level = level,
+            this.instanceBackground();
         this.drawBackground();
     }
 
     instanceBackground() {
-        this.image = new Image();
-        this.image.src = "./img/desert_bg2.png"
+        if (this.level === 0) {
+            this.image = new Image();
+            this.image.src = "./img/jungle-bg.jpg"
+        }
+        if (this.level === 1) {
+            this.image = new Image();
+            this.image.src = "./img/winter1.jpg"
+        }
+        if (this.level === 2) {
+            this.image = new Image();
+            this.image.src = "./img/farm-bg.jpg"
+        }
+
     }
 
     drawBackground() {

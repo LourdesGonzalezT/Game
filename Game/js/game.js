@@ -1,5 +1,5 @@
 const game = {
-    appName: 'Random Game',
+    appName: 'Crazy Frog',
     author: 'Alvaro & Lourdes',
     version: '1.0.0',
     license: undefined,
@@ -60,6 +60,7 @@ const game = {
 
     jump() {
         this.player.playerSpecs.pos.playerY -= this.player.playerSpecs.speedJump
+        this.player.playAudioPlayer()
     },
 
     moveRight() {
@@ -138,6 +139,7 @@ const game = {
             if (this.player.playerSpecs.liveCounter > 0) {
                 if (this.enemieColision1()) {
                     this.player.playerSpecs.liveCounter -= 1
+                    this.player.playAudioEnemie()
                 }
             }
             else {
@@ -151,8 +153,8 @@ const game = {
     },
 
     reset() {
-        this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH)
-        this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize)
+        this.background = new Background(this.ctx, 0, 0, this.canvasSize.canvasW, this.canvasSize.canvasH, this.level)
+        this.player = new Player(this.ctx, 600, this.canvasSize.canvasH - 200, 200, 200, this.canvasSize, this.level)
         this.goal = new Goal(this.ctx, this.canvasSize.canvasW - 800, 300, 800, 400, "white")
         this.enemies1 = []
         this.platforms1 = []

@@ -1,5 +1,5 @@
 class Player {
-    constructor(ctx, playerX, playerY, playerW, playerH, canvasSize) {
+    constructor(ctx, playerX, playerY, playerW, playerH, canvasSize, level) {
         this.ctx = ctx;
         this.canvasSize = canvasSize
         this.playerSpecs = {
@@ -9,14 +9,43 @@ class Player {
             speedJump: 500,
             gravity: 10,
             liveCounter: 100,
+            level: level
         }
         this.instancePlayer();
         this.drawPlayer();
+        this.instanceAudio()
+        this.instanceAudioEnemmie()
     }
 
     instancePlayer() {
         this.image = new Image();
         this.image.src = "./img/rana.png"
+    }
+    instanceAudio() {
+        this.audio = new Audio();
+        this.audio.src = "./audio/audioranajump.mp3"
+    }
+    instanceAudioEnemmie() {
+        if (this.playerSpecs.level === 0) {
+            this.audioEnemie = new Audio();
+            this.audioEnemie.src = "./audio/audiomono.mp3"
+        }
+        if (this.playerSpecs.level === 1) {
+            this.audioEnemie = new Audio();
+            this.audioEnemie.src = "./audio/pinguiaudio.mp3"
+        }
+        if (this.playerSpecs.level === 2) {
+            this.audioEnemie = new Audio();
+            this.audioEnemie.src = "./audio/alpacataudio.mp3"
+        }
+
+    }
+
+    playAudioPlayer() {
+        this.audio.play()
+    }
+    playAudioEnemie() {
+        this.audioEnemie.play()
     }
 
     drawPlayer() {

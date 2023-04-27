@@ -11,11 +11,16 @@ class Enemie {
             damage: 10,
             level: level
         }
-        this.instanceEnimie()
-        this.drawEnemie();
+        this.instanceEnemie()
+        this.drawEnemie()
+
     }
-    instanceEnimie() {
-        if (this.enemieSpecs.level < 2) {
+    instanceEnemie() {
+        if (this.enemieSpecs.level === 0) {
+            this.image = new Image();
+            this.image.src = "./img/mono3.png"
+        }
+        if (this.enemieSpecs.level === 1) {
             this.image = new Image();
             this.image.src = "./img/pinguino.png"
         }
@@ -23,8 +28,6 @@ class Enemie {
             this.image = new Image();
             this.image.src = "./img/alpacat.png"
         }
-
-
     }
     drawEnemie() {
         this.moveEnemie()
