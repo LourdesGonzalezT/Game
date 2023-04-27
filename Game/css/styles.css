@@ -18,7 +18,7 @@ img {
 }
 
 .box1 {
-    background-image: url(../img/patronrana.jpeg);
+    background-image: url(../img/frog-bar-bg.jpeg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -27,22 +27,18 @@ img {
     text-align: center
 }
 
-
-
 .box2 {
-
     background-color: black;
 }
 
 .box3 {
-    background-image: url(../img/patronrana.jpeg);
+    background-image: url(../img/frog-bar-bg.jpeg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #scoreBar {
-
     width: 100%;
     background-color: green;
     height: 100%;
@@ -54,15 +50,4 @@ img {
     height: 100%;
     font-weight: bold;
     font-size: 150px;
-    /* background-image: url(../img/button.png);
-    color: black;
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: sans-serif;
-    text-align: center;
-    padding: auto;
-    display: block;
-    width: 150px;
-    margin: 0 auto; */
 }

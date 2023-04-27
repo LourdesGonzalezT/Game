@@ -3,7 +3,7 @@ const game = {
     author: 'Alvaro & Lourdes',
     version: '1.0.0',
     license: undefined,
-    description: 'Platform game for domies',
+    description: 'Help your crazy frog to reach his water lily',
     ctx: undefined,
     level: 0,
     frameIndex: 0,
@@ -134,7 +134,7 @@ const game = {
                 clearInterval(this.playing)
                 this.background.stopAudioBackground()
                 this.player.playAudioGoal()
-                if (confirm("Nivel Completado!") === true) {
+                if (confirm("Nivel 1 Completado!") === true) {
                     this.level++
                     this.init()
                 }
@@ -144,20 +144,19 @@ const game = {
                 clearInterval(this.playing)
                 this.background.stopAudioBackground()
                 this.player.playAudioGoal()
-                if (confirm("Nivel Completado!") === true) {
+                if (confirm("Nivel 2 Completado!") === true) {
                     this.level++
                     this.init()
                 }
             }
             if (this.goalColision() === true && this.level === 2) {
                 this.player.playerSpecs.gravity = 0
-
                 clearInterval(this.playing)
                 this.background.stopAudioBackground()
                 this.clearAll()
-
                 this.goal.drawWinner()
-                this.player.playAudioGoal()
+                this.player.playAudioWinner()
+                this.level = 0
             }
 
             this.enemieColision1()
@@ -170,9 +169,10 @@ const game = {
             else {
 
                 this.ctx.fillStyle = "black"
-                this.ctx.font = '200px arial'
-                this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 500, this.canvasSize.canvasH / 2)
+                this.ctx.font = '250px arial'
+                this.ctx.fillText("GAME OVER!", this.canvasSize.canvasW / 2 - 600, this.canvasSize.canvasH / 2)
                 this.background.stopAudioBackground()
+                this.player.playAudioGameOver()
                 clearInterval(this.playing)
             }
         }, 1000 / this.FPS)
@@ -208,21 +208,21 @@ const game = {
         if (this.level === 0) {
             if (this.enemies1.length < 5) {
                 if (this.frameIndex % 150 === 0) {
-                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 500, 500, 20, 5, "grey", this.level))
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, Math.random() * 400, 200, 500, 500, 20, 5, this.level))
                 }
             }
         }
         if (this.level === 1) {
             if (this.enemies1.length < 10) {
                 if (this.frameIndex % 150 === 0) {
-                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 600, 600, 30, 10, "grey", this.level))
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, Math.random() * 400, 200, 600, 600, 30, 10, this.level))
                 }
             }
         }
         if (this.level === 2) {
             if (this.enemies1.length < 5) {
                 if (this.frameIndex % 150 === 0) {
-                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 800, 800, 30, 10, "grey", this.level))
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, Math.random() * 400, 200, 800, 800, 30, 10, this.level))
                 }
             }
         }

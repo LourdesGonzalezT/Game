@@ -1,4 +1,3 @@
-// game.init()
 
 window.onload = () => {
     document.getElementById('button-start').onclick = () => {
@@ -10,8 +9,8 @@ window.onload = () => {
 
     function deleteDiv() {
         let divSup = document.getElementById("div-sup")
-        let padre = divSup.parentNode
-        padre.removeChild(divSup)
+        let father = divSup.parentNode
+        father.removeChild(divSup)
 
     }
     function startGame() {

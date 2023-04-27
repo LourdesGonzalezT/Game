@@ -11,7 +11,7 @@ class Platform {
     }
     instancePlatform() {
         this.image = new Image();
-        this.image.src = "./img/platform1.png"
+        this.image.src = "./img/platform-platform.png"
     }
     drawPlatform() {
         this.move()

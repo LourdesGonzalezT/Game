@@ -15,8 +15,8 @@ class Goal {
         this.drawGoal()
     }
     instanceGoal() {
-        this.image = new Image();
-        this.image.src = "./img/nenufar.png"
+        this.image = new Image()
+        this.image.src = "./img/nenuphar-goal.png"
     }
 
     drawGoal() {
@@ -29,8 +29,8 @@ class Goal {
         )
     }
     instanceWinner() {
-        this.imageWinner = new Image();
-        this.imageWinner.src = "./img/winner.png"
+        this.imageWinner = new Image()
+        this.imageWinner.src = "./img/winner-bg.png"
     }
 
     drawWinner() {

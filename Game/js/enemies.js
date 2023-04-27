@@ -1,5 +1,5 @@
 class Enemie {
-    constructor(ctx, canvasSize, enemieX, enemieY, enemieW, enemieH, speedX, speedY, color, level) {
+    constructor(ctx, canvasSize, enemieX, enemieY, enemieW, enemieH, speedX, speedY, level) {
         this.ctx = ctx
         this.canvasSize = canvasSize
         this.enemieSpecs = {
@@ -7,7 +7,7 @@ class Enemie {
             size: { enemieW: enemieW, enemieH: enemieH },
             speedX: speedX,
             speedY: speedY,
-            color: color,
+
             damage: 10,
             level: level
         }
@@ -18,15 +18,15 @@ class Enemie {
     instanceEnemie() {
         if (this.enemieSpecs.level === 0) {
             this.image = new Image();
-            this.image.src = "./img/mono3.png"
+            this.image.src = "./img/monkey-enemie.png"
         }
         if (this.enemieSpecs.level === 1) {
             this.image = new Image();
-            this.image.src = "./img/pinguino.png"
+            this.image.src = "./img/penguin-enemie.png"
         }
         if (this.enemieSpecs.level === 2) {
             this.image = new Image();
-            this.image.src = "./img/alpacat.png"
+            this.image.src = "./img/alpacat-enemie.png"
         }
     }
     drawEnemie() {

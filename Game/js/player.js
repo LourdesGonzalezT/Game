@@ -1,6 +1,6 @@
 class Player {
     constructor(ctx, playerX, playerY, playerW, playerH, canvasSize, level) {
-        this.ctx = ctx;
+        this.ctx = ctx
         this.canvasSize = canvasSize
         this.playerSpecs = {
             pos: { playerX: playerX, playerY: playerY },
@@ -11,37 +11,48 @@ class Player {
             liveCounter: 100,
             level: level
         }
-        this.instancePlayer();
-        this.drawPlayer();
+        this.instancePlayer()
+        this.drawPlayer()
         this.instanceAudio()
         this.instanceAudioEnemmie()
         this.instanceAudioGoal()
+        this.instanceAudioGameOver()
+        this.instanceAudioWinner()
     }
 
     instancePlayer() {
-        this.image = new Image();
-        this.image.src = "./img/rana.png"
+        this.image = new Image()
+        this.image.src = "./img/frog-player.png"
     }
     instanceAudio() {
-        this.audio = new Audio();
-        this.audio.src = "./audio/audioranajump.mp3"
+        this.audio = new Audio()
+        this.audio.src = "./audio/frog-audio.mp3"
     }
     instanceAudioGoal() {
-        this.audioGoal = new Audio();
-        this.audioGoal.src = "./audio/goalaudio.mp3"
+        this.audioGoal = new Audio()
+        this.audioGoal.src = "./audio/goal-audio.mp3"
+    }
+
+    instanceAudioGameOver() {
+        this.audioGameOver = new Audio()
+        this.audioGameOver.src = "./audio/gameover-audio.mp3"
+    }
+    instanceAudioWinner() {
+        this.audioWinner = new Audio()
+        this.audioWinner.src = "./audio/winner-audio.mp3"
     }
     instanceAudioEnemmie() {
         if (this.playerSpecs.level === 0) {
             this.audioEnemie = new Audio();
-            this.audioEnemie.src = "./audio/audiomono.mp3"
+            this.audioEnemie.src = "./audio/monkey-audio.mp3"
         }
         if (this.playerSpecs.level === 1) {
             this.audioEnemie = new Audio();
-            this.audioEnemie.src = "./audio/pinguiaudio.mp3"
+            this.audioEnemie.src = "./audio/pingui-audio.mp3"
         }
         if (this.playerSpecs.level === 2) {
-            this.audioEnemie = new Audio();
-            this.audioEnemie.src = "./audio/alpacataudio.mp3"
+            this.audioEnemie = new Audio()
+            this.audioEnemie.src = "./audio/alpacat-audio.mp3"
         }
 
     }
@@ -54,6 +65,12 @@ class Player {
     }
     playAudioGoal() {
         this.audioGoal.play()
+    }
+    playAudioGameOver() {
+        this.audioGameOver.play()
+    }
+    playAudioWinner() {
+        this.audioWinner.play()
     }
 
     drawPlayer() {
