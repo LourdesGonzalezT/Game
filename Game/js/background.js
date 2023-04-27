@@ -8,7 +8,16 @@ class Background {
         }
         this.level = level,
             this.instanceBackground();
+        this.instanceAudioBackground()
         this.drawBackground();
+    }
+    instanceAudioBackground() {
+        this.audioBackground = new Audio()
+        this.audioBackground.src = "./audio/gamemusic.mp3"
+    }
+    playAudioBackground() {
+        this.audioBackground.play()
+        this.audioBackground.volume -= 0.8
     }
 
     instanceBackground() {

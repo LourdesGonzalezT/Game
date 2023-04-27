@@ -15,6 +15,7 @@ class Player {
         this.drawPlayer();
         this.instanceAudio()
         this.instanceAudioEnemmie()
+        this.instanceAudioGoal()
     }
 
     instancePlayer() {
@@ -24,6 +25,10 @@ class Player {
     instanceAudio() {
         this.audio = new Audio();
         this.audio.src = "./audio/audioranajump.mp3"
+    }
+    instanceAudioGoal() {
+        this.audioGoal = new Audio();
+        this.audioGoal.src = "./audio/goalaudio.mp3"
     }
     instanceAudioEnemmie() {
         if (this.playerSpecs.level === 0) {
@@ -46,6 +51,9 @@ class Player {
     }
     playAudioEnemie() {
         this.audioEnemie.play()
+    }
+    playAudioGoal() {
+        this.audioGoal.play()
     }
 
     drawPlayer() {

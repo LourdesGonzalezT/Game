@@ -76,6 +76,7 @@ const game = {
     },
 
     start() {
+        this.background.playAudioBackground()
 
         this.playing = setInterval(() => {
             this.frameIndex > 5000 ? this.frameIndex = 0 : this.frameIndex++
@@ -97,7 +98,7 @@ const game = {
                 this.player.playerSpecs.gravity = 0
             }
             if (this.level === 2 && this.platformColisionUp4() && this.player.viewPlayer()) {
-                this.player.playerSpecs.pos.playerX += 10
+                this.player.playerSpecs.pos.playerX += 5
                 this.player.playerSpecs.gravity = 0
             }
 
@@ -130,6 +131,7 @@ const game = {
             if (this.goalColision() === true) {
                 this.player.playerSpecs.gravity = 0
                 clearInterval(this.playing)
+                this.player.playAudioGoal()
                 if (confirm("Nivel Completado!") === true) {
                     this.level++
                     this.init()
@@ -182,14 +184,14 @@ const game = {
         if (this.level === 0) {
             if (this.enemies1.length < 5) {
                 if (this.frameIndex % 150 === 0) {
-                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 200, 200, 20, 5, "grey", this.level))
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 500, 500, 20, 5, "grey", this.level))
                 }
             }
         }
         if (this.level === 1) {
             if (this.enemies1.length < 10) {
                 if (this.frameIndex % 150 === 0) {
-                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 400, 400, 30, 10, "grey", this.level))
+                    this.enemies1.push(new Enemie(this.ctx, this.canvasSize, 200, 200, 600, 600, 30, 10, "grey", this.level))
                 }
             }
         }
