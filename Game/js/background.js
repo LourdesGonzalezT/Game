@@ -17,7 +17,7 @@ class Background {
     }
     playAudioBackground() {
         this.audioBackground.play()
-        this.audioBackground.volume -= 0.85
+        this.audioBackground.volume -= 0.7
     }
     stopAudioBackground() {
         this.audioBackground.pause()

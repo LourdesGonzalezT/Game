@@ -130,20 +130,20 @@ const game = {
 
             this.goalColision()
             if (this.goalColision() === true && this.level === 0) {
+                this.player.playAudioGoal()
                 this.player.playerSpecs.gravity = 0
                 clearInterval(this.playing)
                 this.background.stopAudioBackground()
-                this.player.playAudioGoal()
                 if (confirm("Nivel 1 Completado!") === true) {
                     this.level++
                     this.init()
                 }
             }
             if (this.goalColision() === true && this.level === 1) {
+                //this.player.playAudioGoal()
                 this.player.playerSpecs.gravity = 0
                 clearInterval(this.playing)
                 this.background.stopAudioBackground()
-                this.player.playAudioGoal()
                 if (confirm("Nivel 2 Completado!") === true) {
                     this.level++
                     this.init()
@@ -330,8 +330,8 @@ const game = {
         return (
             this.player.playerSpecs.pos.playerX + this.player.playerSpecs.size.playerW > this.goal.goalSpecs.pos.goalX + 60 &&
             this.player.playerSpecs.pos.playerX < this.goal.goalSpecs.pos.goalX + this.goal.goalSpecs.size.goalW - 60 &&
-            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > this.goal.goalSpecs.pos.goalY - 10 + 120 &&
-            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < this.goal.goalSpecs.pos.goalY + 10 + 120
+            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH > this.goal.goalSpecs.pos.goalY - 10 + 110 &&
+            this.player.playerSpecs.pos.playerY + this.player.playerSpecs.size.playerH < this.goal.goalSpecs.pos.goalY + 10 + 110
         )
     },
 

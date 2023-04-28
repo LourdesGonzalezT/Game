@@ -66,11 +66,15 @@ class Player {
     playAudioGoal() {
         this.audioGoal.play()
     }
+
     playAudioGameOver() {
         this.audioGameOver.play()
     }
     playAudioWinner() {
         this.audioWinner.play()
+    }
+    stopAudioWinner() {
+        this.audioWinner.pause()
     }
 
     drawPlayer() {

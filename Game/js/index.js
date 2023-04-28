@@ -15,5 +15,6 @@ window.onload = () => {
     }
     function startGame() {
         game.init()
+        this.player.stopAudioWinner()
     }
 };
