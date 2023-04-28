@@ -11,10 +11,9 @@ window.onload = () => {
         let divSup = document.getElementById("div-sup")
         let father = divSup.parentNode
         father.removeChild(divSup)
-
     }
+
     function startGame() {
         game.init()
-        this.player.stopAudioWinner()
     }
 };
