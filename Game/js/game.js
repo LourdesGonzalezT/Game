@@ -37,7 +37,7 @@ const game = {
     setDimensions() {
         this.canvasSize = {
             canvasW: window.innerWidth,
-            canvasH: window.innerHeight - 200,
+            canvasH: window.innerHeight - 320,
         }
         document.querySelector('canvas').setAttribute('width', this.canvasSize.canvasW)
         document.querySelector('canvas').setAttribute('height', this.canvasSize.canvasH)
